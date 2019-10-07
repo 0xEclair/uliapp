@@ -6,8 +6,6 @@ import 'package:dio/dio.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  Dio dio=Dio();
-
   final String title;
 
   @override
@@ -15,9 +13,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
+    getHttp();
     return Scaffold(
       appBar: createAppBar("uliuli"),
       body: Center(
@@ -29,5 +27,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+
+  Dio _dio=Dio();
+  Response  _response;
+
+  void getHttp() async{
+    _response = await _dio.get("http://www.yoshino.studio:3389/api/v1/videos");
+    print(_response);
   }
 }
