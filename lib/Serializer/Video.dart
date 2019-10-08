@@ -18,7 +18,7 @@ class Video{
         url=json["url"],
         avatar=json["avatar"],
         view=json["view"],
-        user=new User.fromJson(json["user"]),
+        user=User.fromJson(json["user"]),
         createdAt=json["created_at"];
 
 }
