@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar createAppBar(String Title){
+AppBar createAppBar(String titleInfo){
   return AppBar(
     title:Row(children: <Widget>[
       Stack(children: <Widget>[
