@@ -1,3 +1,5 @@
+import 'dart:ui' as prefix0;
+
 import 'package:flutter/material.dart';
 import 'package:uliapp/View/DisplayVideo.dart';
 import 'AppBar.dart';
@@ -71,20 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder:(context)=>watchVideo(video_address: video_url))
         );
       },
+      borderRadius: BorderRadius.circular(20),
     );
   }
 
   List<Widget> _video_list;
-}
-
-
-class newRoute extends StatelessWidget{
-  build(BuildContext context){
-    return Scaffold(
-      appBar: createAppBar("route"),
-      body: Center(
-        child: Text("This is new route"),
-      ),
-    );
-  }
 }
