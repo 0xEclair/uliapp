@@ -18,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState(){
     _video_list=List<Widget>();
-    _init_videolist();
+    initVideoList();
   }
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  void _init_videolist() {
+  void initVideoList() {
     Future<VideoList>  data=getVideoList();
     data.then((_videoList){
       for(int i=0;i<_videoList.total;++i){
