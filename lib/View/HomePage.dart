@@ -1,5 +1,3 @@
-import 'dart:ui' as prefix0;
-
 import 'package:flutter/material.dart';
 import 'package:uliapp/View/DisplayVideo.dart';
 import 'AppBar.dart';
@@ -20,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState(){
     _video_list=List<Widget>();
-    gridVideo();
+    _init_videolist();
   }
   @override
   Widget build(BuildContext context) {
@@ -45,14 +43,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  void gridVideo() async{
-    VideoList  _videoList=await getVideoList();
-    for(int i=0;i<_videoList.total;++i){
-      _video_list.add(videoCard(_videoList.items[i].title, _videoList.items[i].avatar,_videoList.items[i].url));
-    }
-    setState(() {
+  void _init_videolist() {
+    Future<VideoList>  data=getVideoList();
+    data.then((_videoList){
+      for(int i=0;i<_videoList.total;++i){
+        _video_list.add(videoCard(_videoList.items[i].title, _videoList.items[i].avatar,_videoList.items[i].url));
+      }
+      setState(() {
 
+      });
     });
+
   }
   videoCard(String title,String uri,String video_url){
     return InkWell(
