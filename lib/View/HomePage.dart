@@ -4,7 +4,7 @@ import 'AppBar.dart';
 import 'dart:ui';
 import 'package:uliapp/Serializer/Common.dart';
 import '../Service/VideoList.dart';
-
+import 'NavigationBarWidget.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
         ],
-      )
+      ),
+      bottomNavigationBar: bottomNavigation(),
     );
   }
 
