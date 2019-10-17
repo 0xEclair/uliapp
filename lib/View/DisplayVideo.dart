@@ -22,19 +22,18 @@ class watchVideoState extends State<watchVideo>{
 
     // TODO: implement initState
     super.initState();
-
     video_player_=VideoPlayerController.network(widget.video_address);
     chewie_player_=ChewieController(
       videoPlayerController: video_player_,
       aspectRatio: 3/2,
-      autoPlay: true,
-      looping: false
+      autoPlay:false,
+      looping: false,
+      autoInitialize: true
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     // TODO: implement build
     return Scaffold(
       appBar: createAppBar("video"),
