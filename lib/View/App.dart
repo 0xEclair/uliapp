@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uliapp/View/DisplayVideo.dart';
 import 'AppBar.dart';
 import 'dart:ui';
@@ -18,6 +19,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   void initState(){
+    _initCache();
     _video_list=List<Widget>();
     initVideoList();
     _pages=List<Widget>();
@@ -88,4 +90,11 @@ class _AppState extends State<App> {
   List<Widget> _pages;
   List<Widget> _video_list;
   int _current_index=0;
+
+  final storage=new FlutterSecureStorage();
+  _initCache() async {
+    Map<String, String> allValues = await storage.readAll();
+    String value = await storage.read(key: "token");
+    if(value==null)value="123";
+  }
 }
