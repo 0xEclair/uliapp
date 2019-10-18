@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'View/HomePage.dart';
+import 'View/App.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.pink),
-      home: MyHomePage(title: 'Flutter Demo Home Page')
+      home: App(title: 'Flutter Demo Home Page')
     );
   }
 }
