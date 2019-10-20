@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uliapp/View/DisplayVideo.dart';
+import 'package:uliapp/View/Login.dart';
 import 'AppBar.dart';
 import 'dart:ui';
 import 'package:uliapp/Serializer/Common.dart';
-import '../Service/VideoList.dart';
+import '../Service/Video.dart';
 import 'NavigationBarWidget.dart';
 import 'HomePage.dart';
 class App extends StatefulWidget {
@@ -20,10 +21,10 @@ class _AppState extends State<App> {
   @override
   void initState(){
     _initCache();
-    _video_list=List<Widget>();
+    _video_list=List<Widget>();_login_page=new loginPage(callback:setToken);
     initVideoList();
     _pages=List<Widget>();
-    _pages.add(Text(""));
+    _pages.add(Text("asd"));
 
   }
   @override
@@ -60,7 +61,8 @@ class _AppState extends State<App> {
         setState(() {
           _pages.add(HomePage(_video_list));
           _pages.add(Message());
-//          _pages.add();
+          _pages.add(_login_page.createLoginPage());
+
       });
     });
 
@@ -95,6 +97,12 @@ class _AppState extends State<App> {
   _initCache() async {
     Map<String, String> allValues = await storage.readAll();
     String value = await storage.read(key: "token");
-    if(value==null)value="123";
+    //storage.deleteAll();
+  }
+
+  loginPage _login_page; String token;
+  void setToken(String token){
+    this.token=token;
+    print(this.token);
   }
 }
