@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uliapp/View/DisplayVideo.dart';
-import 'package:uliapp/View/Login.dart';
+import 'package:uliapp/View/User.dart';
 import 'AppBar.dart';
 import 'dart:ui';
 import 'package:uliapp/Serializer/Common.dart';
@@ -21,7 +21,7 @@ class _AppState extends State<App> {
   @override
   void initState(){
     _initCache();
-    _video_list=List<Widget>();_login_page=new loginPage(callback:setToken);
+    _video_list=List<Widget>();
     initVideoList();
     _pages=List<Widget>();
     _pages.add(Text("asd"));
@@ -52,7 +52,7 @@ class _AppState extends State<App> {
 
 
   void initVideoList() {
-    Future<VideoList>  data=getVideoList();
+    Future<VideoList>  data=GetVideoListService();
     data.then((_videoList){
         for(int i=0;i<_videoList.total;++i){
           _video_list.add(videoCard(_videoList.items[i].title, _videoList.items[i].avatar,_videoList.items[i].url));
@@ -61,8 +61,7 @@ class _AppState extends State<App> {
         setState(() {
           _pages.add(HomePage(_video_list));
           _pages.add(Message());
-          _pages.add(_login_page.createLoginPage());
-
+          _pages.add(new UserPage(token: token,callback: setToken));
       });
     });
 
@@ -83,7 +82,7 @@ class _AppState extends State<App> {
             context,
             // MaterialPageRoute继承自PageRoute类，
             // PageRoute类是一个抽象类，表示占有整个屏幕空间的一个模态路由页面，
-            MaterialPageRoute(builder:(context)=>watchVideo(video_address: video_url))
+            MaterialPageRoute(builder:(context)=>OpenVideo(video_address: video_url))
         );
       },
       borderRadius: BorderRadius.circular(20),
@@ -97,12 +96,14 @@ class _AppState extends State<App> {
   _initCache() async {
     Map<String, String> allValues = await storage.readAll();
     String value = await storage.read(key: "token");
+    token=value;
     //storage.deleteAll();
   }
 
-  loginPage _login_page; String token;
+  String token;
   void setToken(String token){
     this.token=token;
+    storage.write(key: "token", value: token);
     print(this.token);
   }
 }

@@ -3,23 +3,22 @@ import 'package:uliapp/View/AppBar.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
-class watchVideo extends StatefulWidget{
+class OpenVideo extends StatefulWidget{
   String video_address;
-  watchVideo({
+  OpenVideo({
     Key key,
     @required this.video_address}):super (key:key);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return watchVideoState();
+    return OpenVideoState();
   }
 }
 
-class watchVideoState extends State<watchVideo>{
+class OpenVideoState extends State<OpenVideo>{
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
     video_player_=VideoPlayerController.network(widget.video_address);

@@ -12,10 +12,7 @@ class bottomNavigation extends StatelessWidget{
       showUnselectedLabels: true
     );
   }
-
-
 }
-
 
 createItem(IconData view,String name){
   return BottomNavigationBarItem(

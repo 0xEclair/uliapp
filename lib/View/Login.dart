@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-class loginPage {
+class LoginPage {
 
-  final callback;
-  loginPage({this.callback});
+  final setTokenCb;  final refreshCb;
+  LoginPage({@required this.setTokenCb,@required this.refreshCb});
+
 
   Widget createLoginPage(){
      return Column(
@@ -57,8 +58,9 @@ class loginPage {
 
     Map<String, dynamic> data=json.decode(response.toString());
 
-    callback(data["token"]);
+    setTokenCb(data["token"]);
     _createToast("登陆成功");
+    refreshCb(data["token"]);
   }
 
   _createToast(String message){
