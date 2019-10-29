@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-class LoginPage {
 
-  final setTokenCb;  final refreshCb;
-  LoginPage({@required this.setTokenCb,@required this.refreshCb});
-
-
-  Widget createLoginPage(){
+import 'package:provider/provider.dart';
+import 'package:uliapp/Model/StorageModel.dart';
+class LoginPage extends StatelessWidget{
+  @override
+  build(BuildContext context){
      return Column(
       children: <Widget>[
         TextField(
@@ -35,15 +34,15 @@ class LoginPage {
           child:Text("登录"),
           shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           onPressed: (){
-            _verifyAccount();
-
+            _verifyAccount(context);
           },
         )
       ],
     );
   }
 
-  _verifyAccount() async {
+  _verifyAccount(BuildContext context) async {
+    final storage=Provider.of<StorageModel>(context);
     if(_user_name.text=="" || _password.text==""){
       _createToast("用户名或密码为空，请重试");
       return ;
@@ -57,10 +56,9 @@ class LoginPage {
     }
 
     Map<String, dynamic> data=json.decode(response.toString());
-
-    setTokenCb(data["token"]);
+    storage.setToken(data["token"]);
+    storage.userModel.online=true;
     _createToast("登陆成功");
-    refreshCb(data["token"]);
   }
 
   _createToast(String message){

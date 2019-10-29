@@ -20,7 +20,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   void initState(){
-    _initCache();
     _video_list=List<Widget>();
     initVideoList();
     _pages=List<Widget>();
@@ -61,7 +60,7 @@ class _AppState extends State<App> {
         setState(() {
           _pages.add(HomePage(_video_list));
           _pages.add(Message());
-          _pages.add(new UserPage(token: token,callback: setToken));
+          _pages.add(new User());
       });
     });
 
@@ -92,18 +91,4 @@ class _AppState extends State<App> {
   List<Widget> _video_list;
   int _current_index=0;
 
-  final storage=new FlutterSecureStorage();
-  _initCache() async {
-    Map<String, String> allValues = await storage.readAll();
-    String value = await storage.read(key: "token");
-    token=value;
-    //storage.deleteAll();
-  }
-
-  String token;
-  void setToken(String token){
-    this.token=token;
-    storage.write(key: "token", value: token);
-    print(this.token);
-  }
 }

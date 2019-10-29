@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:uliapp/Model/StorageModel.dart';
 import 'View/App.dart';
-void main() => runApp(MyApp());
+import 'package:provider/provider.dart';
+void main() {
+  final storageModel=new StorageModel();
+  return runApp(ChangeNotifierProvider.value(
+      value: storageModel,
+      child: MyApp()
+  ));
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
