@@ -4,6 +4,7 @@ import 'View/App.dart';
 import 'package:provider/provider.dart';
 void main() {
   final storageModel=new StorageModel();
+  storageModel.init();
   return runApp(ChangeNotifierProvider.value(
       value: storageModel,
       child: MyApp()

@@ -10,6 +10,7 @@ class User extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     final storage=Provider.of<StorageModel>(context);
+
     return storage.userModel.online?Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
